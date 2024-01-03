@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import OAuth from '../components/OAuth';
 
 export default function SignIn() {
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   function onChange(e){
     setEmail(e.target.value);
@@ -14,7 +12,7 @@ export default function SignIn() {
       <h1 className='text-3xl mt-6 font-bold text-center'>Sign In</h1>
       <div className='flex justify-center items-center py-6 px-12 max-w-6xl mx-auto flex-wrap'>
         <div className='md:w-[67%] lg:w-[50%] mb-12 md:mb-6'>
-          <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2V5fGVufDB8fDB8fHww" alt="key" className='w-full rounded-2xl'/>
+          <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="key" className='w-full rounded-2xl'/>
         </div>
         <div className='w-full lg:w-[40%] md:w-[67%] lg:ml-20'>
           <form>

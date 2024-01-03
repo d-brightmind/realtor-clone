@@ -2,9 +2,16 @@ import React, { useState } from 'react'
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { db } from '../firebase'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,15 +24,36 @@ export default function SignUp() {
       [e.target.id]: e.target.value,
     }));
   }
+  async function onSubmit(e){
+    e.preventDefault()
+
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user
+
+      updateProfile(auth.currentUser, {
+        displayName: name
+      })
+      
+      const formDataCopy = formData;
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+      await setDoc(doc(db, "users", user.uid), formDataCopy)
+      navigate('/')
+    } catch (error) {
+      toast.error('Something went wrong')
+    }
+  }
   return (
     <section>
       <h1 className='text-3xl mt-6 font-bold text-center'>Sign Up</h1>
       <div className='flex justify-center items-center py-6 px-12 max-w-6xl mx-auto flex-wrap'>
         <div className='md:w-[67%] lg:w-[50%] mb-12 md:mb-6'>
-          <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2V5fGVufDB8fDB8fHww" alt="key" className='w-full rounded-2xl'/>
+          <img src="https://images.unsplash.com/flagged/photo-1564767609342-620cb19b2357?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="key" className='w-full rounded-2xl'/>
         </div>
         <div className='w-full lg:w-[40%] md:w-[67%] lg:ml-20'>
-          <form>
+          <form onSubmit={onSubmit}>
               <input 
                 type="text"
                 id='name'

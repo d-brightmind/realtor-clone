@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 
 export default function Header() {
     const location = useLocation();
