@@ -41,7 +41,7 @@ export default function CreateListing() {
                     <input type="number" id="bathrooms" value={bathrooms} required onChange={onChange} min='1' max='50' className='w-full py-2 px-4 text-xl text-gray-700 mb-6 border border-slate-300 focus:bg-white bg-white rounded transition ease-in-out duration-200 focus:border-slate-600'/>
                 </div>
             </div>
-            <p className='text-lg font-semibold'>Parking slot</p>
+            <p className='text-lg font-semibold'>Parking Slot</p>
             <div className="flex">
                 <button type="submit" className={`w-full mr-3 px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg transition ease-in-out duration-200 active:shadow-lg ${!parking ? 'bg-white text-black' : 'bg-slate-600 text-white'}`} id='parking' value={true} onClick={onChange}>
                     yes
@@ -50,7 +50,7 @@ export default function CreateListing() {
                     no
                 </button>
             </div>
-            <p className='text-lg font-semibold mt-6'>Furnished</p>
+            <p className='text-lg font-semibold mt-6'>Furnished?</p>
             <div className="flex">
                 <button type="submit" className={`w-full mr-3 px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg transition ease-in-out duration-200 active:shadow-lg ${!furnished ? 'bg-white text-black' : 'bg-slate-600 text-white'}`} id='furnished' value={true} onClick={onChange}>
                     yes
