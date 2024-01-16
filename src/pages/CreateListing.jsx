@@ -14,8 +14,40 @@ export default function CreateListing() {
         regularPrice: 0,
         discountedPrice: 0,
     });
-    const { type, name, bedrooms, bathrooms, parking, furnished, address, description, offer, regularPrice, discountedPrice } = formData;
-    function onChange() {}
+    const { 
+        type, 
+        name, 
+        bedrooms, 
+        bathrooms, 
+        parking, 
+        furnished, 
+        address, 
+        description, 
+        offer, 
+        regularPrice, 
+        discountedPrice,
+    } = formData;
+    function onChange(e) {
+        let boolean = null;
+        if(e.target.value === "true") {
+            boolean = true;
+        }
+        if(e.target.value === "false") {
+            boolean = false;
+        }
+        if(e.target.files) {
+            setFormData((prevState)=>({
+                ...prevState,
+                images: e.target.files,
+            }));
+        }
+        if(!e.target.files) {
+            setFormData((prevState) => ({
+                ...prevState,
+                [e.target.id]: boolean ?? e.target.value,
+            }));
+        }
+    }
   return (
     <main className='max-w-md mx-auto px-2'>
         <h1 className='text-3xl font-bold mt-6 text-center'>Create Listing</h1>
@@ -25,7 +57,7 @@ export default function CreateListing() {
                 <button type="submit" className={`w-full mr-3 px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg transition ease-in-out duration-200 active:shadow-lg ${type === "rent" ? 'bg-white text-black' : 'bg-slate-600 text-white'}`} id='type' value="sale" onClick={onChange}>
                     sell
                 </button>
-                <button type="submit" className={`w-full ml-3 px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg transition ease-in-out duration-200 active:shadow-lg ${type === "sale" ? 'bg-white text-black' : 'bg-slate-600 text-white'}`} id='type' value="sale" onClick={onChange}>
+                <button type="submit" className={`w-full ml-3 px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg transition ease-in-out duration-200 active:shadow-lg ${type === "sale" ? 'bg-white text-black' : 'bg-slate-600 text-white'}`} id='type' value="rent" onClick={onChange}>
                     rent
                 </button>
             </div>
@@ -34,7 +66,7 @@ export default function CreateListing() {
             <div className="flex space-x-6">
                 <div className="">
                     <p className='text-lg font-semibold'>Beds</p>
-                    <input type="number" id="name" value={bedrooms} onChange={onChange} min='1' max='50' className='w-full py-2 px-4 text-xl text-gray-700 mb-6 border border-slate-300 focus:bg-white bg-white rounded transition ease-in-out duration-200 focus:border-slate-600'/>
+                    <input type="number" id="bedrooms" value={bedrooms} onChange={onChange} min='1' max='50' className='w-full py-2 px-4 text-xl text-gray-700 mb-6 border border-slate-300 focus:bg-white bg-white rounded transition ease-in-out duration-200 focus:border-slate-600'/>
                 </div>
                 <div className="">
                     <p className='text-lg font-semibold'>Baths</p>
